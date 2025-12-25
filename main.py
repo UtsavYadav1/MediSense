@@ -2,14 +2,22 @@ from flask import Flask, request, render_template, jsonify, redirect, url_for, s
 import numpy as np
 import pandas as pd
 import pickle
-import torch
 import os
 from dotenv import load_dotenv
-from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 import ast
+
+# Optional ML imports (not required for rules-based diagnosis)
+try:
+    import torch
+    from transformers import AutoTokenizer, AutoModelForSequenceClassification
+    ML_AVAILABLE = True
+except ImportError:
+    print("PyTorch/transformers not installed. ML predictions disabled. Rules-based diagnosis will work.")
+    torch = None
+    ML_AVAILABLE = False
 
 import database  # our MySQL connection helper
 import utils     # Telemedicine utilities
@@ -39,28 +47,35 @@ diets = pd.read_csv("diet_clean.csv")
 doctors = pd.read_csv("doctor_specialization_clean.csv")  # disease → recommended specialist
 
 # ==========================================
-# Load BioBERT / DistilBERT Model and Tokenizer
+# Load BioBERT / DistilBERT Model and Tokenizer (OPTIONAL)
 # ==========================================
 MODEL_PATH = "medical_bert_model"
-try:
-    tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
-    model = AutoModelForSequenceClassification.from_pretrained(MODEL_PATH)
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    model.to(device)
-    print("Medical model loaded successfully.")
-except Exception as e:
-    print(f"Error loading model: {e}")
-    model = None
-    tokenizer = None
+model = None
+tokenizer = None
+device = None
+
+if ML_AVAILABLE:
+    try:
+        tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
+        model = AutoModelForSequenceClassification.from_pretrained(MODEL_PATH)
+        device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        model.to(device)
+        print("Medical model loaded successfully.")
+    except Exception as e:
+        print(f"ML model not loaded (optional): {e}")
+        model = None
+        tokenizer = None
+else:
+    print("Running in rules-only mode (no ML model).")
 
 # Load Label Encoder
+le = None
 try:
     with open('label_encoder.pkl', 'rb') as f:
         le = pickle.load(f)
     print("Label encoder loaded.")
 except FileNotFoundError:
-    print("Error: label_encoder.pkl not found.")
-    le = None
+    print("Label encoder not found (optional for rules-based mode).")
 
 
 # ==========================================
