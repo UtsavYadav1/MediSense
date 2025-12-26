@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, jsonify, redirect, url_for, session, flash
+from flask import Flask, request, render_template, jsonify, redirect, url_for, session, flash, send_from_directory
 import numpy as np
 import pandas as pd
 import pickle
@@ -178,6 +178,12 @@ def get_predicted_value(user_text):
 # ==========================================
 # PUBLIC ROUTES
 # ==========================================
+
+# Google Search Console Verification
+@app.route('/googleb2777ecea8879182.html')
+def google_verification():
+    return send_from_directory('static', 'googleb2777ecea8879182.html')
+
 @app.route("/")
 def index():
     # Fetch real stats from database for home page
