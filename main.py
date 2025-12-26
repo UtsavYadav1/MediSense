@@ -381,10 +381,10 @@ def predict():
                 cursor.execute(
                     """
                     INSERT INTO symptoms_logs 
-                    (patient_id, symptoms_text, disease_predicted, description, medications, precautions, diets, workouts, pdf_path, confidence_level, recommended_specialist)
-                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                    (patient_id, symptoms_text, disease_predicted, description, medications, precautions, diets, workouts, pdf_path, confidence_level, recommended_specialist, patient_age, patient_gender)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                     """,
-                    (session['user_id'], symptoms, predicted_disease, dis_des, str(meds), str(my_precautions), str(rec_diet), str(wrk), pdf_path, confidence_level, specialist)
+                    (session['user_id'], symptoms, predicted_disease, dis_des, str(meds), str(my_precautions), str(rec_diet), str(wrk), pdf_path, confidence_level, specialist, age, gender)
                 )
                 conn.commit()
                 log_id = cursor.lastrowid
