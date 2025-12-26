@@ -1,0 +1,18 @@
+# robots.txt for MediSense
+User-agent: *
+Allow: /
+Allow: /login
+Allow: /signup
+Allow: /about
+Allow: /contact
+Allow: /check_symptoms
+Allow: /view_doctors
+
+# Disallow private/authenticated pages
+Disallow: /patient_dashboard
+Disallow: /doctor_dashboard
+Disallow: /admin_dashboard
+Disallow: /my_appointments
+
+# Sitemap location
+Sitemap: https://medisense-app.up.railway.app/static/sitemap.xml
