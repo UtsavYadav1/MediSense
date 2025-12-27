@@ -103,16 +103,10 @@
                         data-city="{{ doc.city.lower() }}" data-speciality="{{ doc.specialization }}">
                         <div class="card-pro p-3 h-100 d-flex flex-row align-items-center">
                             <div class="me-3 flex-shrink-0">
-                                {% if doc.profile_pic %}
-                                <img src="{{ url_for('static', filename='uploads/profile_pics/' + doc.profile_pic) }}"
-                                    alt="Doctor" class="rounded-circle"
-                                    style="width: 60px; height: 60px; object-fit: cover;">
-                                {% else %}
                                 <div class="bg-primary bg-opacity-10 p-3 rounded-circle text-primary d-flex align-items-center justify-content-center"
                                     style="width: 60px; height: 60px;">
                                     <i class="fa-solid fa-user-doctor fa-2x"></i>
                                 </div>
-                                {% endif %}
                             </div>
                             <div class="flex-grow-1">
                                 <h5 class="mb-1 fw-bold text-main">{{ doc.name }}</h5>

@@ -135,27 +135,16 @@
 
                     <div id="profileMap"></div>
 
-                    <form action="/update_doctor_profile" method="post" enctype="multipart/form-data">
-                        <!-- Profile Photo -->
-                        <div class="mb-3 text-center">
-                            <div class="profile-photo-container">
-                                {% if doctor.profile_pic %}
-                                <img src="{{ url_for('static', filename='uploads/profile_pics/' + doctor.profile_pic) }}"
-                                    alt="Profile" id="profilePreview">
-                                {% else %}
-                                <div class="bg-primary bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center mx-auto text-primary"
-                                    style="width: 100px; height: 100px;" id="defaultAvatar">
-                                    <i class="fa-solid fa-user-doctor fa-3x"></i>
-                                </div>
-                                <img src="" alt="Profile" id="profilePreview" style="display: none;">
-                                {% endif %}
-                                <label for="profileUpload" class="camera-btn">
-                                    <i class="fa-solid fa-camera text-primary small"></i>
-                                </label>
-                                <input type="file" id="profileUpload" name="profile_pic" class="d-none" accept="image/*"
-                                    onchange="previewImage(this)">
+                    <form action="/update_doctor_profile" method="post">
+                        <!-- Profile Avatar (Default) -->
+                        <div class="mb-4 text-center">
+                            <div class="bg-primary bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center mx-auto text-primary"
+                                style="width: 100px; height: 100px;">
+                                <i class="fa-solid fa-user-doctor fa-3x"></i>
                             </div>
-                            <div class="form-text small mt-2">Tap icon to change photo</div>
+                            <div class="mt-2">
+                                <span class="badge bg-primary bg-opacity-10 text-primary">{{ doctor.name }}</span>
+                            </div>
                         </div>
 
                         <div class="mb-3">
