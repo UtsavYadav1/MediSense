@@ -68,3 +68,5 @@ static/reports/*
 # Temporary files
 *.tmp
 *.bak
+
+medical_bert_model/

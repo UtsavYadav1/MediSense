@@ -1,0 +1,9 @@
+USE railway;
+
+DELETE FROM admins;
+
+INSERT INTO admins (name, email, password) VALUES (
+    'Admin',
+    'admin@wellsure.com',
+    'scrypt:32768:8:1$w2MMTNmmuQYK1Ufk$7d7969485e9b0ece200a7dbd3cf39f2a0a3d5137797b8ced5883bee1cdf0beb922d851ae41b0397e0dd56aba34a8e595518bc31912b8da677276b6a2634407d1'
+);

@@ -1,6 +1,6 @@
-# MediSense – Intelligent Medical Diagnosis & Appointment Platform
+# WellSure – Intelligent Medical Diagnosis & Appointment Platform
 
-MediSense is a comprehensive healthcare platform that combines **AI-assisted symptom analysis** with a robust **telemedicine system**. It provides confidence-based disease predictions using a clinical rules engine, connects patients with specialists based on their diagnosis and location, and facilitates seamless appointment booking.
+WellSure is a comprehensive healthcare platform that combines **AI-assisted symptom analysis** with a robust **telemedicine system**. It provides confidence-based disease predictions using a clinical rules engine, connects patients with specialists based on their diagnosis and location, and facilitates seamless appointment booking.
 
 > ⚠️ **Disclaimer:** This platform is designed for educational and assistance purposes only. It does not replace professional medical advice, diagnosis, or treatment.
 
@@ -34,7 +34,7 @@ MediSense is a comprehensive healthcare platform that combines **AI-assisted sym
 
 ## 🔬 How the Diagnosis Works
 
-MediSense uses a **rules-first safety layer** combined with intelligent symptom analysis:
+WellSure uses a **rules-first safety layer** combined with intelligent symptom analysis:
 
 ```
 User Input → Symptom Normalization → Rules Engine → Confidence Scoring → Result
@@ -119,8 +119,8 @@ User Input → Symptom Normalization → Rules Engine → Confidence Scoring →
 
 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/yourusername/medisense.git
-   cd medisense
+   git clone https://github.com/yourusername/WellSure.git
+   cd WellSure
    ```
 
 2. **Create Virtual Environment**

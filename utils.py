@@ -94,7 +94,7 @@ def log_activity(user_id, role, action, details=""):
 def generate_pdf_report(filepath, patient_name, disease, symptoms, description, medications, precautions, diets, workouts, age=None, gender=None):
     """
     Generate a professional PDF report for the medical prediction.
-    Updated for MediSense branding with optional age/gender context.
+    Updated for WellSure branding with optional age/gender context.
     """
     doc = SimpleDocTemplate(filepath, pagesize=letter)
     styles = getSampleStyleSheet()
@@ -102,7 +102,7 @@ def generate_pdf_report(filepath, patient_name, disease, symptoms, description, 
 
     # Title
     title_style = ParagraphStyle('Title', parent=styles['Heading1'], fontSize=24, spaceAfter=20, textColor=colors.darkblue)
-    story.append(Paragraph("MediSense - Medical Report", title_style))
+    story.append(Paragraph("WellSure - Medical Report", title_style))
     story.append(Spacer(1, 12))
 
     # Patient Details
