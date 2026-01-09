@@ -33,6 +33,10 @@ app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', 'medimind_secure_secret_key')
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
 
+# Fix for Railway proxy - ensures correct HTTPS URL generation
+from werkzeug.middleware.proxy_fix import ProxyFix
+app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
+
 # Google OAuth Configuration
 oauth = OAuth(app)
 google = oauth.register(
