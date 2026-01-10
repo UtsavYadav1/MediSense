@@ -496,6 +496,34 @@
             }
         }
     </script>
+
+    <!-- Mobile Bottom Navigation (Doctor) -->
+    <nav class="mobile-bottom-nav">
+        <div class="nav-container">
+            <a href="/" class="nav-item">
+                <i class="fa-solid fa-house"></i>
+                <span>Home</span>
+            </a>
+            <a href="/doctor_dashboard" class="nav-item active">
+                <i class="fa-solid fa-gauge-high"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="/doctor_dashboard#appointments" class="nav-item nav-main">
+                <i class="fa-solid fa-calendar-check"></i>
+                <span>Appts</span>
+            </a>
+            <a href="/doctor_dashboard" class="nav-item" data-bs-toggle="modal" data-bs-target="#profileModal"
+                onclick="return false;">
+                <i class="fa-solid fa-user-pen"></i>
+                <span>Profile</span>
+            </a>
+            <a href="/logout" class="nav-item">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+    </nav>
+
 </body>
 
 </html>
