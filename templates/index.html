@@ -1047,12 +1047,40 @@
     </footer>
 
     <!-- Mobile Bottom Navigation (App-like) -->
+    <!-- Mobile Bottom Navigation (App-like) -->
     <nav class="mobile-bottom-nav">
         <div class="nav-container">
             <a href="/" class="nav-item active">
                 <i class="fa-solid fa-house"></i>
                 <span>Home</span>
             </a>
+
+            {% if session.role == 'doctor' %}
+            <!-- Doctor Specific Nav -->
+            <a href="/doctor_dashboard" class="nav-item">
+                <i class="fa-solid fa-gauge-high"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="/doctor_dashboard#appointments" class="nav-item nav-main">
+                <i class="fa-solid fa-calendar-check"></i>
+                <span>Appts</span>
+            </a>
+            <a href="/doctor_dashboard#profile-section" class="nav-item">
+                <i class="fa-solid fa-user-pen"></i>
+                <span>My Profile</span>
+            </a>
+            {% elif session.role == 'admin' %}
+            <!-- Admin Specific Nav -->
+            <a href="/admin_dashboard" class="nav-item">
+                <i class="fa-solid fa-lock"></i>
+                <span>Admin</span>
+            </a>
+            <a href="/logout" class="nav-item">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </a>
+            {% else %}
+            <!-- Patient / Guest Nav -->
             <a href="/check_symptoms" class="nav-item">
                 <i class="fa-solid fa-stethoscope"></i>
                 <span>Symptoms</span>
@@ -1065,6 +1093,7 @@
                 <i class="fa-solid fa-user-doctor"></i>
                 <span>Doctors</span>
             </a>
+
             {% if session.user_id %}
             <a href="/patient_dashboard" class="nav-item">
                 <i class="fa-solid fa-user"></i>
@@ -1075,6 +1104,7 @@
                 <i class="fa-solid fa-right-to-bracket"></i>
                 <span>Login</span>
             </a>
+            {% endif %}
             {% endif %}
         </div>
     </nav>

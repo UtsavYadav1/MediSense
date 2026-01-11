@@ -521,199 +521,206 @@ body.light-theme .btn-close {
 /* =========================== MOBILE STYLES (≤576px) =========================== */
 
 @media (max-width: 576px) {
+
     /* Body & Container */
     body {
         padding-top: 70px;
         font-size: 14px;
     }
-    
+
     .container {
         padding-left: 15px;
         padding-right: 15px;
     }
-    
+
     /* Typography */
-    h1, .display-5 {
+    h1,
+    .display-5 {
         font-size: 1.75rem !important;
     }
-    
+
     h2 {
         font-size: 1.5rem;
     }
-    
-    h3, h4, h5 {
+
+    h3,
+    h4,
+    h5 {
         font-size: 1.15rem;
     }
-    
+
     /* Hero Section */
     .hero-section {
         padding: 60px 0 50px;
     }
-    
+
     .hero-title {
         font-size: 2rem;
     }
-    
+
     .hero-subtitle {
         font-size: 1rem;
         padding: 0 10px;
     }
-    
+
     /* Cards */
     .card-pro {
         padding: 16px;
         margin-bottom: 15px;
     }
-    
+
     .glass-container {
         padding: 20px;
     }
-    
+
     /* Buttons */
     .btn {
         padding: 10px 16px;
         font-size: 0.9rem;
     }
-    
-    .btn-lg, .btn-primary-gradient {
+
+    .btn-lg,
+    .btn-primary-gradient {
         padding: 12px 20px;
         font-size: 1rem;
     }
-    
+
     /* Make CTA buttons full width on mobile */
     .btn-primary-gradient.w-100 {
         padding: 14px 20px;
     }
-    
+
     /* Dashboard header flex-wrap */
     .d-flex.justify-content-between {
         flex-wrap: wrap;
         gap: 10px;
     }
-    
-    .d-flex.justify-content-between > * {
+
+    .d-flex.justify-content-between>* {
         flex: 1 1 100%;
     }
-    
+
     .d-flex.justify-content-between .btn {
         width: 100%;
         margin-top: 10px;
     }
-    
+
     /* Quick action cards stack */
-    .row.g-4 > [class*="col-md"] {
+    .row.g-4>[class*="col-md"] {
         margin-bottom: 10px;
     }
-    
+
     /* Tables - horizontal scroll */
     .table-responsive {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
     }
-    
+
     .table {
         min-width: 600px;
     }
-    
-    .table th, .table td {
+
+    .table th,
+    .table td {
         padding: 10px 8px;
         font-size: 0.8rem;
     }
-    
+
     /* Modals - fit in screen */
     .modal-dialog {
         margin: 10px;
         max-height: calc(100vh - 20px);
     }
-    
+
     .modal-content {
         max-height: calc(100vh - 40px);
         overflow-y: auto;
     }
-    
+
     .modal-body {
         padding: 15px;
     }
-    
+
     /* Forms */
-    .form-control, .form-select {
+    .form-control,
+    .form-select {
         padding: 10px 12px;
         font-size: 0.9rem;
     }
-    
-    .row.g-2 > [class*="col-"] {
+
+    .row.g-2>[class*="col-"] {
         margin-bottom: 8px;
     }
-    
+
     /* Follow-up questions */
     .followup-section {
         margin: 15px 0;
     }
-    
+
     .followup-section .p-4 {
         padding: 15px !important;
     }
-    
+
     /* Explanation panel */
-    #explanationPanel .row.g-3 > [class*="col-md"] {
+    #explanationPanel .row.g-3>[class*="col-md"] {
         flex: 0 0 100%;
         max-width: 100%;
         margin-bottom: 15px;
     }
-    
+
     /* Action tiles grid */
-    .row.g-3 > .col-6.col-md-4 {
+    .row.g-3>.col-6.col-md-4 {
         flex: 0 0 50%;
         max-width: 50%;
     }
-    
+
     .action-tile {
         padding: 15px 10px !important;
     }
-    
+
     .action-tile i.fa-lg {
         font-size: 1rem;
     }
-    
+
     .action-tile span {
         font-size: 0.8rem;
     }
-    
+
     /* Badges */
     .badge {
         font-size: 0.7rem;
         padding: 4px 8px;
     }
-    
+
     /* Sticky side panel - make non-sticky on mobile */
     .sticky-top {
         position: relative !important;
         top: auto !important;
     }
-    
+
     /* Diagnosis result container */
     .diagnosis-result-container {
         padding: 20px 15px !important;
     }
-    
+
     .diagnosis-result-container h1 {
         font-size: 1.5rem !important;
     }
-    
+
     /* Doctor CTA button */
     .btn-primary-gradient.py-4.fs-5 {
         padding: 15px !important;
         font-size: 1rem !important;
     }
-    
+
     .btn-primary-gradient.py-4.fs-5 .d-flex.align-items-center.gap-3 {
         gap: 10px !important;
     }
-    
+
     .btn-primary-gradient.py-4.fs-5 .lh-1 div {
         font-size: 0.9rem;
     }
-    
+
     .btn-primary-gradient.py-4.fs-5 .lh-1 small {
         font-size: 0.75rem !important;
     }
@@ -722,67 +729,70 @@ body.light-theme .btn-close {
 /* =========================== TABLET STYLES (577px - 992px) =========================== */
 
 @media (min-width: 577px) and (max-width: 992px) {
+
     /* Body */
     body {
         padding-top: 75px;
     }
-    
+
     /* Typography */
-    h1, .display-5 {
+    h1,
+    .display-5 {
         font-size: 2.25rem !important;
     }
-    
+
     h2 {
         font-size: 1.75rem;
     }
-    
+
     /* Hero */
     .hero-section {
         padding: 80px 0 70px;
     }
-    
+
     .hero-title {
         font-size: 2.5rem;
     }
-    
+
     /* Cards */
     .card-pro {
         padding: 20px;
     }
-    
+
     .glass-container {
         padding: 30px;
     }
-    
+
     /* Dashboard - 2 column grid */
-    .row.g-4 > .col-md-4 {
+    .row.g-4>.col-md-4 {
         flex: 0 0 50%;
         max-width: 50%;
     }
-    
+
     /* Tables */
-    .table th, .table td {
+    .table th,
+    .table td {
         padding: 12px 10px;
         font-size: 0.85rem;
     }
-    
+
     /* Modals */
     .modal-dialog {
         max-width: 90%;
     }
-    
+
     /* Explanation panel - 2 columns */
-    #explanationPanel .row.g-3 > [class*="col-md-3"] {
+    #explanationPanel .row.g-3>[class*="col-md-3"] {
         flex: 0 0 50%;
         max-width: 50%;
     }
-    
+
     /* Action tiles */
-    .row.g-3 > .col-6.col-md-4 {
+    .row.g-3>.col-6.col-md-4 {
         flex: 0 0 33.333%;
         max-width: 33.333%;
     }
-    
+
     /* Side panel */
     .col-lg-4 .sticky-top {
         position: relative !important;
@@ -793,7 +803,8 @@ body.light-theme .btn-close {
 /* =========================== GENERAL RESPONSIVE UTILITIES =========================== */
 
 /* Prevent horizontal overflow globally */
-html, body {
+html,
+body {
     overflow-x: hidden;
     max-width: 100%;
 }
@@ -833,29 +844,37 @@ img {
 }
 
 /* Form row responsiveness */
-.row.g-2, .row.g-3 {
+.row.g-2,
+.row.g-3 {
     margin-left: -8px;
     margin-right: -8px;
 }
 
-.row.g-2 > *, .row.g-3 > * {
+.row.g-2>*,
+.row.g-3>* {
     padding-left: 8px;
     padding-right: 8px;
 }
 
 /* Print styles - hide nav and show content nicely */
 @media print {
-    .navbar, .btn, .theme-btn, .followup-section, .mobile-bottom-nav {
+
+    .navbar,
+    .btn,
+    .theme-btn,
+    .followup-section,
+    .mobile-bottom-nav {
         display: none !important;
     }
-    
+
     body {
         padding-top: 0;
         background: white;
         color: black;
     }
-    
-    .card-pro, .modal-content {
+
+    .card-pro,
+    .modal-content {
         box-shadow: none;
         border: 1px solid #ddd;
     }
@@ -873,11 +892,11 @@ img {
     right: 0;
     background: var(--bg-card);
     border-top: 1px solid var(--border-color);
-    padding: 8px 0;
+    padding: 6px 0;
     z-index: 1050;
-    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 }
 
 .mobile-bottom-nav .nav-container {
@@ -895,10 +914,10 @@ img {
     justify-content: center;
     text-decoration: none;
     color: var(--text-muted);
-    padding: 6px 12px;
+    padding: 4px 8px;
     border-radius: var(--radius-sm);
     transition: var(--transition);
-    min-width: 60px;
+    min-width: 56px;
 }
 
 .mobile-bottom-nav .nav-item:hover,
@@ -907,16 +926,16 @@ img {
 }
 
 .mobile-bottom-nav .nav-item.active {
-    background: rgba(0, 188, 212, 0.1);
+    background: rgba(0, 188, 212, 0.08);
 }
 
 .mobile-bottom-nav .nav-item i {
-    font-size: 1.25rem;
-    margin-bottom: 4px;
+    font-size: 1.2rem;
+    margin-bottom: 3px;
 }
 
 .mobile-bottom-nav .nav-item span {
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.02em;
@@ -925,16 +944,18 @@ img {
 /* Center highlight for main action */
 .mobile-bottom-nav .nav-item.nav-main {
     position: relative;
+    top: -12px;
 }
 
 .mobile-bottom-nav .nav-item.nav-main i {
     background: linear-gradient(135deg, var(--primary) 0%, #0097a7 100%);
     color: white;
-    padding: 12px;
+    padding: 10px;
     border-radius: 50%;
     font-size: 1.1rem;
     margin-bottom: 2px;
-    box-shadow: 0 4px 15px rgba(0, 188, 212, 0.4);
+    box-shadow: 0 4px 12px rgba(0, 188, 212, 0.35);
+    border: 3px solid var(--bg-body);
 }
 
 /* Show only on mobile */
@@ -942,15 +963,15 @@ img {
     .mobile-bottom-nav {
         display: block;
     }
-    
+
     /* Add bottom padding to body to account for bottom nav */
     body {
-        padding-bottom: 70px;
+        padding-bottom: 60px;
     }
-    
+
     /* Hide footer on mobile since we have bottom nav */
     .footer-enhanced {
-        padding-bottom: 80px;
+        padding-bottom: 70px;
     }
 }
 
@@ -959,33 +980,36 @@ img {
    ============================================================================= */
 
 @media (max-width: 768px) {
+
     /* Cleaner mobile navbar */
     .navbar {
-        padding: 8px 0;
+        padding: 6px 0;
+        min-height: 56px;
     }
-    
+
     .navbar-brand {
-        font-size: 1.25rem;
+        font-size: 1.15rem;
     }
-    
+
     .navbar-brand img {
-        height: 36px !important;
-        width: 36px !important;
+        height: 32px !important;
+        width: 32px !important;
+        margin-right: 8px !important;
     }
-    
+
     /* Hamburger button styling */
     .navbar-toggler {
         border: none;
-        padding: 8px;
-        background: var(--bg-surface);
-        border-radius: var(--radius-sm);
+        padding: 6px;
+        font-size: 1.1rem;
+        background: transparent;
     }
-    
+
     .navbar-toggler:focus {
         box-shadow: none;
         outline: none;
     }
-    
+
     /* Mobile menu dropdown */
     .navbar-collapse {
         position: absolute;
@@ -994,35 +1018,39 @@ img {
         right: 10px;
         background: var(--bg-card);
         border-radius: var(--radius-md);
-        padding: 15px;
+        padding: 12px;
         border: 1px solid var(--border-color);
         box-shadow: var(--shadow-lg);
-        margin-top: 8px;
+        margin-top: 4px;
     }
-    
+
     .navbar-collapse .navbar-nav {
-        margin-bottom: 15px;
+        margin-bottom: 12px;
     }
-    
+
     .navbar-collapse .nav-link {
-        padding: 12px 16px !important;
+        padding: 10px 14px !important;
         border-radius: var(--radius-sm);
-        margin-bottom: 4px;
+        margin-bottom: 2px;
+        font-size: 0.95rem;
     }
-    
+
     .navbar-collapse .nav-link.active {
-        background: rgba(0, 188, 212, 0.15);
+        background: rgba(0, 188, 212, 0.1);
+        color: var(--primary);
+        font-weight: 600;
     }
-    
+
     /* Hide theme toggle in mobile dropdown */
     .navbar-collapse .theme-btn {
         display: inline-flex;
     }
-    
+
     /* Login button full width on mobile */
     .navbar-collapse .btn {
         width: 100%;
-        margin-top: 10px;
+        margin-top: 8px;
+        padding: 8px;
     }
 }
 
@@ -1035,25 +1063,25 @@ img {
         padding: 40px 0 30px;
         min-height: auto;
     }
-    
+
     .hero-title {
         font-size: 1.75rem !important;
         line-height: 1.2;
         margin-bottom: 16px;
     }
-    
+
     .hero-subtitle {
         font-size: 0.95rem;
         margin-bottom: 24px;
         line-height: 1.5;
     }
-    
+
     /* Hero buttons stack on mobile */
     .hero-section .d-flex.gap-3 {
         flex-direction: column;
         gap: 12px !important;
     }
-    
+
     .hero-section .btn {
         width: 100%;
     }
