@@ -1,9 +1,20 @@
 import mysql.connector
 import datetime
 import os
-from dotenv import load_dotenv
-
-load_dotenv()
+# Manual safe env loading
+try:
+    with open(os.path.join(os.path.dirname(__file__), '.env'), 'rb') as f:
+        content = f.read()
+        # Decode safely and remove null bytes that crash os.environ
+        text = content.decode('utf-8', errors='ignore').replace('\0', '')
+        for line in text.splitlines():
+            line = line.strip()
+            if not line or line.startswith('#') or '=' not in line:
+                continue
+            k, v = line.split('=', 1)
+            os.environ[k.strip()] = v.strip().strip("'").strip('"')
+except Exception as e:
+    print(f"Warning load .env: {e}")
 
 def get_db_connection():
     return mysql.connector.connect(
