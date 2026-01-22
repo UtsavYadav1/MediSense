@@ -1,0 +1,10 @@
+Flask==2.3.3
+mysql-connector-python==8.1.0
+python-dotenv==1.0.0
+Authlib==1.2.1
+reportlab==4.0.4
+# numpy, pandas, scikit-learn are usually pre-installed on PythonAnywhere.
+# Uncomment below only if you need specific versions and have storage space.
+# numpy==1.24.3
+# pandas==2.0.3
+# scikit-learn==1.3.0
