@@ -1,9 +1,27 @@
 """
-MySQL Backup to PostgreSQL Converter (Fixed)
-Properly handles newlines and single quotes in data values.
+MySQL Backup to PostgreSQL Converter (Fixed - FK Order)
+Properly orders INSERT statements to respect foreign key constraints.
 """
 import re
 import os
+
+# Define table order based on foreign key dependencies
+# Tables with no dependencies first, then dependent tables
+TABLE_ORDER = [
+    'admins',           # No FK
+    'users',            # No FK  
+    'doctors',          # No FK
+    'specializations',  # No FK
+    'symptoms_logs',    # FK: users
+    'appointments',     # FK: users, doctors
+    'doctor_feedback',  # FK: appointments, doctors, users
+    'activity_logs',    # No FK constraint but references users
+]
+
+def get_table_name(insert_statement):
+    """Extract table name from INSERT statement."""
+    match = re.search(r'INSERT INTO ["`]?(\w+)["`]?', insert_statement, re.IGNORECASE)
+    return match.group(1).lower() if match else None
 
 def convert_mysql_to_postgres(input_file='backup.sql', output_file='backup_postgres.sql'):
     if not os.path.exists(input_file):
@@ -13,26 +31,12 @@ def convert_mysql_to_postgres(input_file='backup.sql', output_file='backup_postg
     with open(input_file, 'r', encoding='utf-8', errors='ignore') as f:
         content = f.read()
     
-    # Replace line breaks within string values (multi-line strings break PostgreSQL)
-    # This regex finds text between single quotes and removes newlines inside
-    def fix_string_values(match):
-        value = match.group(1)
-        # Remove newlines, carriage returns, and excess whitespace
-        value = value.replace('\r\n', ' ').replace('\n', ' ').replace('\r', ' ')
-        # Escape single quotes properly for PostgreSQL ('' instead of \')
-        value = value.replace("''", "<<ESCAPED_QUOTE>>")  # Preserve already escaped
-        value = value.replace("\\'", "''")  # MySQL escape to PostgreSQL escape
-        value = value.replace("'", "''")  # Raw quotes to escaped
-        value = value.replace("<<ESCAPED_QUOTE>>", "''")  # Restore preserved
-        return f"'{value}'"
-    
-    # First, join all lines (remove line breaks that break INSERT statements)
-    # Then split properly
+    # Replace Windows line endings
     content = content.replace('\r\n', '\n').replace('\r', '\n')
     
-    # Process line by line, but handle multi-line INSERT statements
+    # Process line by line, handling multi-line INSERT statements
     lines = content.split('\n')
-    processed_lines = []
+    insert_statements = []
     buffer = ""
     
     for line in lines:
@@ -44,7 +48,6 @@ def convert_mysql_to_postgres(input_file='backup.sql', output_file='backup_postg
         
         # Check if this is a complete statement (ends with ;)
         if buffer.endswith(';'):
-            # Process complete INSERT statement
             if buffer.upper().startswith('INSERT'):
                 # Fix backticks to double quotes
                 buffer = buffer.replace('`', '"')
@@ -53,20 +56,47 @@ def convert_mysql_to_postgres(input_file='backup.sql', output_file='backup_postg
                 buffer = buffer.replace("\\'", "''")
                 
                 # Fix backslash escapes for paths
-                buffer = buffer.replace('\\\\', '/')  # Windows paths to Unix
+                buffer = buffer.replace('\\\\', '/')
                 
-                processed_lines.append(buffer)
+                insert_statements.append(buffer)
             buffer = ""
     
-    # Write output
+    # Group INSERT statements by table
+    table_inserts = {table: [] for table in TABLE_ORDER}
+    other_inserts = []
+    
+    for stmt in insert_statements:
+        table_name = get_table_name(stmt)
+        if table_name and table_name in table_inserts:
+            table_inserts[table_name].append(stmt)
+        else:
+            other_inserts.append(stmt)
+    
+    # Write output in correct order
     with open(output_file, 'w', encoding='utf-8') as f:
         f.write("-- PostgreSQL Data Import (converted from MySQL)\n")
-        f.write("-- Run this in Supabase SQL Editor after creating schema with schema_postgres.sql\n\n")
-        for line in processed_lines:
-            f.write(line + '\n')
+        f.write("-- Run this in Supabase SQL Editor after creating schema with schema_postgres.sql\n")
+        f.write("-- Tables are ordered to respect foreign key constraints.\n\n")
+        
+        for table in TABLE_ORDER:
+            if table_inserts[table]:
+                f.write(f"-- {table.upper()} ({len(table_inserts[table])} rows)\n")
+                for stmt in table_inserts[table]:
+                    f.write(stmt + '\n')
+                f.write('\n')
+        
+        # Any other tables (shouldn't be any, but just in case)
+        if other_inserts:
+            f.write("-- OTHER TABLES\n")
+            for stmt in other_inserts:
+                f.write(stmt + '\n')
     
+    total = len(insert_statements)
     print(f"Converted! Output saved to {output_file}")
-    print(f"Total INSERT statements: {len(processed_lines)}")
+    print(f"Total INSERT statements: {total}")
+    for table in TABLE_ORDER:
+        if table_inserts[table]:
+            print(f"  - {table}: {len(table_inserts[table])} rows")
     return True
 
 if __name__ == "__main__":
