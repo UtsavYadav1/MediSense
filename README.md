@@ -1,209 +1,133 @@
-# WellSure – Intelligent Medical Diagnosis & Appointment Platform
+# WellSure: AI-Powered Healthcare Companion
 
-WellSure is a comprehensive healthcare platform that combines **AI-assisted symptom analysis** with a robust **telemedicine system**. It provides confidence-based disease predictions using a clinical rules engine, connects patients with specialists based on their diagnosis and location, and facilitates seamless appointment booking.
+WellSure is a comprehensive healthcare platform that combines **AI-driven symptom diagnosis** with a complete **telemedicine system**. Users can check symptoms, get instant disease predictions, book appointments with specialists, and manage prescriptions—all in one place.
 
-> ⚠️ **Disclaimer:** This platform is designed for educational and assistance purposes only. It does not replace professional medical advice, diagnosis, or treatment.
+![WellSure Dashboard](static/img/dashboard_preview.png)
+
+## 🚀 Live Demo
+**[https://wellsure-an0b.onrender.com](https://wellsure-an0b.onrender.com)**  
+*Note: Hosted on Render Free Tier. Initial load may take ~50 seconds due to cold start.*
 
 ---
 
-## 🌟 Key Features
+## ✨ Features
 
-### 🧠 Symptom-Based Diagnosis
-- **Natural Language Input** – Describe symptoms in everyday language (supports Hinglish and patient-friendly phrases)
-- **Confidence Scoring** – Results shown as LOW, MEDIUM, or HIGH confidence
-- **Emergency Detection** – Automatic red-flag detection for critical symptoms
-- **Disease-Aware Follow-up Questions** – Targeted clarification questions for LOW/MEDIUM confidence cases
-- **Explainable Diagnosis** – "Why this diagnosis?" panel showing matched symptoms
+### 🤖 AI Diagnosis Engine
+- **Rules-Based & ML Analysis**: Checks user symptoms against a medical dataset to predict potential conditions (e.g., Flu, Migraine, COVID-19).
+- **Instant Reports**: Generates a downloadable PDF report with:
+    - Predicted Disease & Confidence Level
+    - Description & Precautions
+    - Recommended Medication & Diet
+    - Specialized Workout Plans
+- **Emergency Detection**: Flags critical keywords (e.g., "chest pain", "breathing difficulty") and advises immediate care.
 
 ### 🏥 Telemedicine & Appointments
-- **Find Doctors Near You** – Visual map with OpenStreetMap, distance-sorted specialists
-- **Appointment Booking** – Schedule consultations with recommended doctors
-- **Prescription Management** – Doctors can upload prescriptions, patients can download
+- **Doctor Discovery**: Find doctors by specialization (Cardiologist, Dermatologist, etc.) or location.
+- **Appointment Booking**: Schedule visits instantly with payments handled via Stripe (simulated).
+- **Teleconsultation**: Doctor-Patient video call integration (via meeting links).
+- **Digital Prescriptions**: Doctors can upload prescriptions directly to the patient's dashboard.
 
-### 👥 Role-Based Dashboards
-- **Patient** – Book appointments, view health history, download reports, rate doctors
-- **Doctor** – Manage schedule, view patient history, upload prescriptions
-- **Admin** – Manage doctors, view system analytics, oversee appointments
-
-### 🎨 Modern UI/UX
-- **Responsive Design** – Works on mobile, tablet, and desktop
-- **Dark/Light Mode** – Toggle between themes
-- **Professional Design** – Glassmorphism and modern aesthetics
+### 👥 User Roles
+- **Patients**: Check symptoms, book appointments, view history, rate doctors.
+- **Doctors**: Manage schedule, view appointments, upload prescriptions, update profile.
+- **Admins**: Manage users, doctors, specializations, and view system logs.
 
 ---
 
-## 🔬 How the Diagnosis Works
+## 🛠️ Technology Stack
 
-WellSure uses a **rules-first safety layer** combined with intelligent symptom analysis:
-
-```
-User Input → Symptom Normalization → Rules Engine → Confidence Scoring → Result
-```
-
-### 1. Symptom Normalization
-- Converts patient language to medical terms (e.g., "tummy ache" → "stomach pain")
-- Supports 100+ symptom aliases including Hinglish phrases
-- Handles typos and common variations
-
-### 2. Rules Engine
-- **49 disease rules** with primary and supporting symptoms
-- **Weighted confidence scoring:**
-  - Primary symptoms = 70% weight
-  - Supporting symptoms = 30% weight
-- **Exclusion rules** to prevent misdiagnosis
-
-### 3. Confidence Levels
-| Level | Meaning |
-|-------|---------|
-| **HIGH** | Strong match with primary symptoms |
-| **MEDIUM** | Partial match, may need clarification |
-| **LOW** | Weak match, follow-up recommended |
-
-### 4. Follow-up Questions
-- Only shown for LOW/MEDIUM confidence cases
-- Disease-specific questions that map to exact symptom keywords
-- Confidence can improve by one level after follow-up (LOW→MEDIUM, MEDIUM→HIGH)
-
-### 5. Emergency Override
-- Detects critical symptoms (chest pain, difficulty breathing, etc.)
-- Bypasses normal flow and recommends immediate medical attention
+- **Backend**: Python (Flask)
+- **Database**: PostgreSQL (Hosted on Supabase)
+- **Frontend**: HTML5, CSS3, JavaScript (Bootstrap 5)
+- **Deployment**: Render (Web Service)
+- **AI/ML**: Scikit-learn, Pandas, NumPy (Rules-based fallback for low-resource environments)
+- **Tools**: Gunicorn, Psycopg2, ReportLab (PDF Gen)
 
 ---
 
-## 🛠️ Tech Stack
-
-| Category | Technology |
-|----------|------------|
-| **Backend** | Python, Flask |
-| **Frontend** | HTML5, CSS3, JavaScript |
-| **Database** | MySQL |
-| **AI/Logic** | Rule-based clinical engine with confidence scoring |
-| **Maps** | OpenStreetMap (Leaflet.js + Nominatim) |
-| **PDF Reports** | ReportLab |
-| **Deployment** | Gunicorn, Docker-ready (Render / Railway / Heroku) |
-
----
-
-## 👤 User Roles
-
-| Role | Capabilities |
-|------|--------------|
-| **Patient** | Check symptoms, view diagnosis, find doctors, book appointments, view history |
-| **Doctor** | Manage profile, view appointments, access patient history, upload prescriptions |
-| **Admin** | Manage doctors, view analytics, oversee all appointments |
-
----
-
-## 📸 Screenshots
-
-> *Add screenshots to the `static/screenshots/` folder and update paths below*
-
-| Feature | Screenshot |
-|---------|------------|
-| Home Page | `![Home](static/screenshots/home.png)` |
-| Diagnosis Results | `![Diagnosis](static/screenshots/diagnosis.png)` |
-| Follow-up Questions | `![Follow-up](static/screenshots/followup.png)` |
-| Patient Dashboard | `![Patient](static/screenshots/patient_dashboard.png)` |
-| Doctor Dashboard | `![Doctor](static/screenshots/doctor_dashboard.png)` |
-| Admin Dashboard | `![Admin](static/screenshots/admin_dashboard.png)` |
-
----
-
-## ⚙️ Installation & Run Locally
+## ⚙️ Local Installation
 
 ### Prerequisites
-- Python 3.8+
-- MySQL Server
+- Python 3.9+
+- PostgreSQL Database (Local or Cloud)
 
 ### Steps
-
-1. **Clone the Repository**
+1. **Clone the Repo**
    ```bash
-   git clone https://github.com/yourusername/WellSure.git
+   git clone https://github.com/UtsavYadav1/WellSure.git
    cd WellSure
    ```
 
-2. **Create Virtual Environment**
+2. **Install Dependencies**
+   It is recommended to use a virtual environment.
    ```bash
-   python -m venv venv
-   source venv/bin/activate  # Windows: venv\Scripts\activate
+   pip install -r requirements_render.txt
    ```
 
-3. **Install Dependencies**
-   ```bash
-   pip install -r requirements.txt
+3. **Configure Environment**
+   Create a `.env` file in the root directory:
+   ```env
+   # PostgreSQL Connection String
+   DATABASE_URL=postgresql://user:password@localhost:5432/wellsure_db
+   
+   # Security
+   SECRET_KEY=your_secret_key_here
+   
+   # Optional: Google OAuth
+   GOOGLE_CLIENT_ID=your_client_id
+   GOOGLE_CLIENT_SECRET=your_client_secret
    ```
 
-4. **Database Setup**
-   - Create a MySQL database named `medimind`
-   - Import the schema:
-     ```bash
-     mysql -u root -p medimind < medimind_schema.sql
-     ```
-
-5. **Configure Environment**
+4. **Initialize Database**
+   You can use the provided SQL scripts or Python helpers:
    ```bash
-   cp .env.example .env
-   # Edit .env with your database credentials
+   # Run schema setup (Manual or via tool)
+   # Import schema_postgres.sql into your database
    ```
 
-6. **Run the Application**
+5. **Run the App**
    ```bash
    python main.py
    ```
-
-7. **Access the Platform**
-   Open: `http://127.0.0.1:5000`
+   Visit `http://localhost:8000`
 
 ---
 
-## 🔑 Test Credentials
+## ☁️ Deployment (Render + Supabase)
 
-| Role | Email | Password |
-|------|-------|----------|
-| Admin | `admin@medimind.com` | `admin123` |
-| Doctor | `doctor@example.com` | `doctor123` |
-| Patient | `patient@example.com` | `patient123` |
+This project is configured for seamless deployment on Render.
 
----
-
-## ⚠️ Safety Disclaimer
-
-- This platform is for **educational and assistance purposes only**
-- It is **not a replacement for professional medical advice**
-- Always consult a qualified healthcare provider for medical decisions
-- Emergency symptoms should be addressed by calling emergency services immediately
+1. **Database**: Create a Postgres database on Supabase.
+2. **Service**: Create a **Web Service** on Render connected to this repo.
+3. **Environment**:
+   - `Runtime`: Python 3
+   - `Build Command`: `pip install -r requirements_render.txt`
+   - `Start Command`: `gunicorn main:app`
+   - `PYTHON_VERSION`: `3.9.18`
+4. **Variables**: Add `DATABASE_URL` from Supabase to Render Environment variables.
 
 ---
 
-## 🚀 Future Enhancements
+## 📂 Project Structure
 
-- [ ] Teleconsultation (video calls)
-- [ ] Push notifications for appointments
-- [ ] Advanced analytics dashboard
-- [ ] Multi-language support
-- [ ] Mobile app version
-
----
-
-## 📝 Notes
-
-- **Maps:** Uses free OpenStreetMap tiles – no API key required
-- **Model Files:** The `medical_bert_model/` folder must be present for ML predictions
-- **Deployment:** Procfile included for Heroku/Render/Railway
-
----
-
-## 👤 Author
-
-**Utsav** – Personal/Educational Project
+```
+WellSure/
+├── main.py                 # Application Entry Point (Routes & Logic)
+├── database.py             # PostgreSQL Connection Handler
+├── rules_engine.py         # Symptom Analysis Logic
+├── templates/              # HTML Pages (Jinja2)
+├── static/                 # CSS, JS, Images, Uploads
+│   ├── css/
+│   ├── js/
+│   └── uploads/            # Prescriptions & Reports
+├── requirements.txt        # Dependencies
+├── render.yaml             # Render Deployment Config
+└── ...
+```
 
 ---
 
-## 📄 License
+## 🛡️ License
+This project is open-source and available under the **MIT License**.
 
-This project is for educational purposes. See LICENSE file for details.
-
----
-
-*Built with ❤️ for smarter healthcare assistance.*
+Built with ❤️ by **Utsav Yadav**.
