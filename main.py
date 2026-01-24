@@ -1397,6 +1397,33 @@ def submit_feedback():
     return redirect(url_for('patient_dashboard'))
 
 
+# SEO Routes
+@app.route('/robots.txt')
+def robots_txt():
+    content = "User-agent: *\nDisallow:\nSitemap: https://wellsure-an0b.onrender.com/sitemap.xml"
+    return Response(content, mimetype="text/plain")
+
+@app.route('/sitemap.xml')
+def sitemap_xml():
+    base_url = "https://wellsure-an0b.onrender.com"
+    pages = [
+        '/', '/about', '/check_symptoms', '/login', '/signup', 
+        '/view_doctors', '/contact'
+    ]
+    
+    xml_content = '<?xml version="1.0" encoding="UTF-8"?>\n'
+    xml_content += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+    
+    for page in pages:
+        xml_content += '  <url>\n'
+        xml_content += f'    <loc>{base_url}{page}</loc>\n'
+        xml_content += '    <changefreq>daily</changefreq>\n'
+        xml_content += '    <priority>0.8</priority>\n'
+        xml_content += '  </url>\n'
+        
+    xml_content += '</urlset>'
+    return Response(xml_content, mimetype="application/xml")
+
 # ==========================================
 # MAIN ENTRY POINT
 # ==========================================
