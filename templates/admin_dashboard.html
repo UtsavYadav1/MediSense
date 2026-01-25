@@ -103,7 +103,7 @@
                     {% endif %}
                     {% endwith %}
 
-                    <form action="/add_doctor" method="post">
+                    <form action="/admin/add_doctor" method="post">
                         <div class="mb-3">
                             <label class="form-label small">Doctor Name</label>
                             <input type="text" name="name" class="form-control" required placeholder="Dr. Name">
@@ -222,7 +222,7 @@
                                     data-address="{{ doc.address }}" data-pincode="{{ doc.pincode }}">
                                     <i class="fa-solid fa-pen"></i>
                                 </button>
-                                <form action="/delete_doctor/{{ doc.id }}" method="post" class="d-inline"
+                                <form action="/admin/delete_doctor/{{ doc.id }}" method="post" class="d-inline"
                                     onsubmit="return confirm('Are you sure you want to delete Dr. {{ doc.name }}?');">
                                     <button type="submit" class="btn btn-sm btn-outline-danger"><i
                                             class="fa-solid fa-trash"></i></button>
@@ -246,7 +246,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="/update_doctor" method="post" id="editDoctorForm">
+                    <form action="/admin/update_doctor" method="post" id="editDoctorForm">
                         <input type="hidden" name="doctor_id" id="edit_id">
 
                         <div class="mb-3">

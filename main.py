@@ -1349,7 +1349,50 @@ def add_doctor():
     return redirect(url_for('admin_dashboard'))
 
 
-@app.route('/admin/delete_doctor/<int:doctor_id>')
+@app.route('/admin/update_doctor', methods=['POST'])
+def update_doctor():
+    if 'user_id' not in session or session.get('role') != 'admin':
+        return redirect(url_for('login'))
+
+    doctor_id = request.form['doctor_id']
+    name = request.form['name']
+    email = request.form['email']
+    specialization = request.form['specialization']
+    fees = request.form['fees']
+    city = request.form['city']
+    address = request.form['address']
+    pincode = request.form['pincode']
+    
+    # Re-geocode
+    lat, lng = utils.geocode_address(address, city, pincode)
+
+    conn = database.get_db_connection()
+    cursor = conn.cursor()
+    try:
+        if lat and lng:
+            cursor.execute(
+                "UPDATE doctors SET name=%s, email=%s, specialization=%s, fees=%s, city=%s, address=%s, pincode=%s, lat=%s, lng=%s WHERE id=%s",
+                (name, email, specialization, fees, city, address, pincode, lat, lng, doctor_id)
+            )
+        else:
+             cursor.execute(
+                "UPDATE doctors SET name=%s, email=%s, specialization=%s, fees=%s, city=%s, address=%s, pincode=%s WHERE id=%s",
+                (name, email, specialization, fees, city, address, pincode, doctor_id)
+            )
+        conn.commit()
+        utils.log_activity(session['user_id'], 'admin', 'update_doctor', f"Updated doctor {name} (ID: {doctor_id})")
+        flash("Doctor Details Updated", "success")
+    except Exception as e:
+        conn.rollback()
+        flash(f"Error updating doctor: {e}", "danger")
+    finally:
+        cursor.close()
+        conn.close()
+
+    return redirect(url_for('admin_dashboard'))
+
+
+@app.route('/admin/delete_doctor/<int:doctor_id>', methods=['POST'])
 def delete_doctor(doctor_id):
     if 'user_id' not in session or session.get('role') != 'admin':
         return redirect(url_for('login'))
@@ -1362,10 +1405,16 @@ def delete_doctor(doctor_id):
         res = cursor.fetchone()
         doc_name = res[0] if res else "Unknown"
 
+        # Manual Cascade Delete (Dependencies first)
+        cursor.execute("DELETE FROM doctor_feedback WHERE doctor_id=%s", (doctor_id,))
+        cursor.execute("DELETE FROM appointments WHERE doctor_id=%s", (doctor_id,))
+        
+        # Now delete doctor
         cursor.execute("DELETE FROM doctors WHERE id=%s", (doctor_id,))
         conn.commit()
+        
         utils.log_activity(session['user_id'], 'admin', 'delete_doctor', f"Deleted doctor {doc_name} (ID: {doctor_id})")
-        flash("Doctor Deleted", "success")
+        flash("Doctor Deleted Successfully", "success")
     except Exception as e:
         conn.rollback()
         flash(f"Error deleting doctor: {e}", "danger")
