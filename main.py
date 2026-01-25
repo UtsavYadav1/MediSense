@@ -813,7 +813,7 @@ def google_callback():
                     "INSERT INTO users (name, email, password, city, address, pincode) VALUES (%s, %s, %s, %s, %s, %s) RETURNING id",
                     (name, email, hashed_password, '', '', '')
                 )
-                user_id = cursor.fetchone()[0]
+                user_id = cursor.fetchone()['id']
                 conn.commit()
                 
                 session['user_id'] = user_id
