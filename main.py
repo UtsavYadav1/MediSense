@@ -974,16 +974,16 @@ def view_doctors():
     # Normalize time fields for JSON serialization compatibility
     # Normalize fields for JSON serialization compatibility (Decimal, Time, Date)
     from decimal import Decimal
-    from datetime import date, datetime, timedelta
+    from datetime import date, datetime, timedelta, time
 
     for doc in doctors_list:
         for k, v in doc.items():
             if isinstance(v, Decimal):
                 doc[k] = float(v)
-            elif isinstance(v, (date, datetime)):
+            elif isinstance(v, (date, datetime, time)):
                 doc[k] = str(v)
             elif isinstance(v, timedelta):
-                # Handle timedelta (already partly handled but ensuring safety)
+                # Handle timedelta
                 seconds = int(v.total_seconds())
                 hours = seconds // 3600
                 minutes = (seconds % 3600) // 60
