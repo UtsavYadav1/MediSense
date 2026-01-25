@@ -1283,7 +1283,7 @@ def admin_dashboard():
 
     conn = database.get_db_connection()
     cursor = database.get_dict_cursor(conn)
-    cursor.execute("SELECT * FROM doctors ORDER BY id DESC")
+    cursor.execute("SELECT *, specialization as speciality FROM doctors ORDER BY id DESC")
     doctors = cursor.fetchall()
     
     cursor.execute("SELECT * FROM users ORDER BY id DESC")
@@ -1294,13 +1294,19 @@ def admin_dashboard():
     
     # Activity Logs
     cursor.execute("SELECT * FROM activity_logs ORDER BY created_at DESC LIMIT 50")
-    logs = cursor.fetchall()
+    activities = cursor.fetchall()
 
     cursor.close()
     conn.close()
+    
+    # Calculate Stats
+    stats = {
+        'doctors': len(doctors),
+        'patients': len(patients)
+    }
 
     return render_template('admin_dashboard.html', doctors=doctors, patients=patients, 
-                           specializations=specializations, logs=logs)
+                           specializations=specializations, activities=activities, stats=stats)
 
 
 @app.route('/admin/add_doctor', methods=['POST'])
