@@ -935,6 +935,10 @@ def update_patient_profile():
         cursor.close()
         conn.close()
 
+    # Redirect Logic
+    next_url = request.form.get('next')
+    if next_url:
+        return redirect(url_for(next_url))
     return redirect(url_for('patient_dashboard'))
 
 
