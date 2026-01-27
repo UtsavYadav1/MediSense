@@ -1158,11 +1158,15 @@ def doctor_dashboard():
         ORDER BY a.appointment_date DESC, a.appointment_time ASC
     """, (doctor_id,))
     appointments = cursor.fetchall()
+    
+    # Get Specializations for Profile Edit
+    cursor.execute("SELECT * FROM specializations ORDER BY name ASC")
+    specializations = cursor.fetchall()
 
     cursor.close()
     conn.close()
 
-    return render_template('doctor_dashboard.html', doctor=doctor, appointments=appointments)
+    return render_template('doctor_dashboard.html', doctor=doctor, appointments=appointments, specializations=specializations)
 
 
 @app.route('/update_doctor_profile', methods=['POST'])

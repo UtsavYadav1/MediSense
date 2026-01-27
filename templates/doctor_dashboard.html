@@ -151,8 +151,8 @@
                             <label class="form-label">Specialization</label>
                             <select class="form-select" name="specialization">
                                 {% for spec in specializations %}
-                                <option value="{{ spec }}" {% if doctor.specialization==spec %}selected{% endif %}>{{
-                                    spec }}</option>
+                                <option value="{{ spec.name }}" {% if doctor.specialization==spec.name %}selected{%
+                                    endif %}>{{ spec.name }}</option>
                                 {% endfor %}
                             </select>
                         </div>
