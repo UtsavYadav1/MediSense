@@ -1185,6 +1185,10 @@ def update_doctor_profile():
     
     # Manage Meeting Link
     meeting_link = request.form.get('meeting_link', '').strip()
+
+    # Manage Availability
+    start_time = request.form.get('start_time')
+    end_time = request.form.get('end_time')
     
     # Re-geocode
     lat, lng = utils.geocode_address(address, city, pincode)
@@ -1194,13 +1198,13 @@ def update_doctor_profile():
     try:
         if lat and lng:
             cursor.execute(
-                "UPDATE doctors SET name=%s, specialization=%s, fees=%s, description=%s, city=%s, address=%s, pincode=%s, lat=%s, lng=%s, default_meeting_link=%s WHERE id=%s",
-                (name, specialization, fees, description, city, address, pincode, lat, lng, meeting_link, doctor_id)
+                "UPDATE doctors SET name=%s, specialization=%s, fees=%s, description=%s, city=%s, address=%s, pincode=%s, lat=%s, lng=%s, default_meeting_link=%s, available_start_time=%s, available_end_time=%s WHERE id=%s",
+                (name, specialization, fees, description, city, address, pincode, lat, lng, meeting_link, start_time, end_time, doctor_id)
             )
         else:
             cursor.execute(
-                "UPDATE doctors SET name=%s, specialization=%s, fees=%s, description=%s, city=%s, address=%s, pincode=%s, default_meeting_link=%s WHERE id=%s",
-                (name, specialization, fees, description, city, address, pincode, meeting_link, doctor_id)
+                "UPDATE doctors SET name=%s, specialization=%s, fees=%s, description=%s, city=%s, address=%s, pincode=%s, default_meeting_link=%s, available_start_time=%s, available_end_time=%s WHERE id=%s",
+                (name, specialization, fees, description, city, address, pincode, meeting_link, start_time, end_time, doctor_id)
             )
         conn.commit()
         utils.log_activity(doctor_id, 'doctor', 'update_profile', "Updated profile details")

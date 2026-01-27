@@ -148,6 +148,11 @@
                         </div>
 
                         <div class="mb-3">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" name="name" class="form-control" value="{{ doctor.name }}" required>
+                        </div>
+
+                        <div class="mb-3">
                             <label class="form-label">Specialization</label>
                             <select class="form-select" name="specialization">
                                 {% for spec in specializations %}
